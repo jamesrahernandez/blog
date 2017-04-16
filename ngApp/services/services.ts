@@ -30,6 +30,10 @@ namespace blog.Services {
     return this.BlogResource.query();
   }
 
+  public removeBlog(id){
+    return this.BlogResource.delete({id:id})
+  }
+
   public constructor(
     public $resource
   ) {

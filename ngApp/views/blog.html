@@ -4,5 +4,6 @@
 
 <li ng-repeat="blog in controller.blogs">
   {{blog.title}}, {{blog.content}}
-  
+  <a href="/edit">Edit Blog</a>
+  <a href="#" ng-click="controller.deleteBlog(blog._id)">Delete Blog</a>
 </li>

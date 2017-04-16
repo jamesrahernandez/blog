@@ -27,4 +27,27 @@ router.get('/', function (req, res) {
         res.json(blog);
     });
 });
+router.post('/:id', function (req, res) {
+    var blogId = req.params.id;
+    blog_1.default.findById(blogId).then(function (blog) {
+        blog.title = req.body.title;
+        blog.content = req.body.content;
+        blog.save().then(function (updatedBlog) {
+            res.json(updatedBlog);
+        }).catch(function (err) {
+            res.status(400).json(err);
+        });
+    }).catch(function () {
+        res.sendStatus(404);
+    });
+});
+router.delete('/:id', function (req, res) {
+    var blogId = req.params.id;
+    blog_1.default.remove({ _id: blogId }).then(function () {
+        res.sendStatus(200);
+    }).catch(function (err) {
+        res.status(500);
+        console.log(err);
+    });
+});
 exports.default = router;

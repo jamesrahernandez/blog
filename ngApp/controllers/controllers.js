@@ -45,6 +45,10 @@ var blog;
                 this.blogService = blogService;
                 this.blogs = this.blogService.list();
             }
+            BlogController.prototype.deleteBlog = function (id) {
+                this.blogService.removeBlog(id);
+            };
+            ;
             ;
             return BlogController;
         }());
@@ -64,6 +68,22 @@ var blog;
             return AddBlogController;
         }());
         Controllers.AddBlogController = AddBlogController;
+        ;
+        var EditBlogController = (function () {
+            function EditBlogController(blogService, $stateParams) {
+                this.blogService = blogService;
+                this.$stateParams = $stateParams;
+                this.id = $stateParams['id'];
+            }
+            EditBlogController.prototype.editBlog = function () {
+                this.blog.id = this.id;
+                this.blogService.saveBlog(this.blog);
+            };
+            ;
+            ;
+            return EditBlogController;
+        }());
+        Controllers.EditBlogController = EditBlogController;
         ;
     })(Controllers = blog.Controllers || (blog.Controllers = {}));
 })(blog || (blog = {}));

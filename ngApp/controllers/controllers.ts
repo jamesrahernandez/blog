@@ -43,6 +43,10 @@ namespace blog.Controllers {
   export class BlogController {
     public blogs;
 
+    public deleteBlog(id) {
+      this.blogService.removeBlog(id);
+    };
+
     public constructor(
       private blogService,
     ) {
@@ -64,7 +68,24 @@ namespace blog.Controllers {
       public $state,
     ) {
 
+    };
   };
-};
+
+  export class EditBlogController {
+    public blog;
+    public id;
+
+    public editBlog() {
+      this.blog.id = this.id;
+      this.blogService.saveBlog(this.blog);
+    };
+
+    public constructor(
+      private blogService,
+      public $stateParams,
+    ) {
+      this.id = $stateParams['id'];
+    };
+  };
 
 };

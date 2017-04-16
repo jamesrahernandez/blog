@@ -32,6 +32,9 @@ var blog;
             BlogService.prototype.list = function () {
                 return this.BlogResource.query();
             };
+            BlogService.prototype.removeBlog = function (id) {
+                return this.BlogResource.delete({ id: id });
+            };
             return BlogService;
         }());
         Services.BlogService = BlogService;

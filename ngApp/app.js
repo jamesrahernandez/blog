@@ -26,6 +26,12 @@ var blog;
             controller: blog.Controllers.AddBlogController,
             controllerAs: 'controller'
         })
+            .state('edit', {
+            url: '/edit',
+            templateUrl: '/ngApp/views/editBlog.html',
+            controller: blog.Controllers.EditBlogController,
+            controllerAs: 'controller'
+        })
             .state('notFound', {
             url: '/notFound',
             templateUrl: '/ngApp/views/notFound.html'
