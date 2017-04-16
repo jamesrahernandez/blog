@@ -1,0 +1,17 @@
+<h2>Login to Account</h2>
+
+<form id="loginform">
+
+  Username:
+  <input type="text" name="username" placeholder="Username" ng-model="controller.userInfo.username" /><br><br>
+
+  Password:
+  <input type="password" name="password" placeholder="Password" ng-model="controller.userInfo.password" /><br><br>
+
+  <input type="submit" name="login" value="Login" ng-click="controller.login()" />
+
+</form>
+
+<div id="createuser">
+  <a href="/register">New Account</a>
+</div>

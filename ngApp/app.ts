@@ -1,0 +1,36 @@
+namespace blog {
+
+    angular.module('blog', ['ui.router', 'ngResource', 'ui.bootstrap']).config((
+        $stateProvider: ng.ui.IStateProvider,
+        $urlRouterProvider: ng.ui.IUrlRouterProvider,
+        $locationProvider: ng.ILocationProvider
+    ) => {
+        // Define routes
+        $stateProvider
+            .state('login', {
+                url: '/',
+                templateUrl: '/ngApp/views/login.html',
+                controller: blog.Controllers.LoginController,
+                controllerAs: 'controller'
+            })
+            .state('register', {
+                url: '/register',
+                templateUrl: '/ngApp/views/register.html',
+                controller: blog.Controllers.RegisterController,
+                controllerAs: 'controller'
+            })
+            .state('notFound', {
+                url: '/notFound',
+                templateUrl: '/ngApp/views/notFound.html'
+            });
+
+        // Handle request for non-existent route
+        $urlRouterProvider.otherwise('/notFound');
+
+        // Enable HTML5 navigation
+        $locationProvider.html5Mode(true);
+    });
+
+
+
+}
