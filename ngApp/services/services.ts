@@ -19,5 +19,21 @@ namespace blog.Services {
 
   };
 
+  export class BlogService {
+  private BlogResource;
+
+  public saveBlog(blog) {
+    return this.BlogResource.save(blog);
+  }
+
+
+  public constructor(
+    public $resource
+  ) {
+    this.BlogResource = $resource('/api/blogs/:id');
+  }
+}
+
   angular.module('blog').service('userService', UserService);
+  angular.module('blog').service('blogService', BlogService);
 }

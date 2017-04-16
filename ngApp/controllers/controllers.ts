@@ -40,4 +40,25 @@ namespace blog.Controllers {
 
 };
 
+export class AddBlogController {
+  public blogs;
+  public blog;
+
+  public addBlog() {
+    this.blogService.saveBlog(this.blog);
+    this.$state.go('blog');
+  };
+
+  public constructor(
+    private blogService,
+    public $state,
+  ) {
+
+  };
+};
+
+export class BlogController {
+
 }
+
+};

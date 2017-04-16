@@ -19,6 +19,18 @@ namespace blog {
                 controller: blog.Controllers.RegisterController,
                 controllerAs: 'controller'
             })
+            .state('blog', {
+                url: '/blog',
+                templateUrl: '/ngApp/views/blog.html',
+                controller: blog.Controllers.BlogController,
+                controllerAs: 'controller'
+            })
+            .state('add', {
+                url: '/add',
+                templateUrl: '/ngApp/views/addBlog.html',
+                controller: blog.Controllers.AddBlogController,
+                controllerAs: 'controller'
+            })
             .state('notFound', {
                 url: '/notFound',
                 templateUrl: '/ngApp/views/notFound.html'

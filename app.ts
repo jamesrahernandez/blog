@@ -8,6 +8,8 @@ import * as ejs from 'ejs';
 import * as mongoose from 'mongoose';
 import * as passport from 'passport';
 
+import blogs from './api/blogs';
+
 import routes from './routes/index';
 import users from './routes/users';
 
@@ -38,6 +40,7 @@ mongoose.connect('mongodb://user:pass@ds145370.mlab.com:45370/blogdb');
 
 app.use('/', routes);
 app.use('/userRoutes/api', users);
+app.use('/api/blogs', blogs);
 
 // redirect 404 to home for the sake of AngularJS client-side routes
 app.get('/*', function(req, res, next) {
