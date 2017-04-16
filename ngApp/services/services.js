@@ -29,6 +29,9 @@ var blog;
             BlogService.prototype.saveBlog = function (blog) {
                 return this.BlogResource.save(blog);
             };
+            BlogService.prototype.list = function () {
+                return this.BlogResource.query();
+            };
             return BlogService;
         }());
         Services.BlogService = BlogService;

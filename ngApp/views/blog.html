@@ -1,3 +1,8 @@
 <h2>Blog</h2>
 
 <a href="/add">Create a new post</a>
+
+<li ng-repeat="blog in controller.blogs">
+  {{blog.title}}, {{blog.content}}
+  
+</li>

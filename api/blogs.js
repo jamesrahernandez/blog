@@ -14,4 +14,17 @@ router.post('/', function (req, res) {
         res.status(400).json(err);
     });
 });
+router.get('/', function (req, res) {
+    blog_1.default.find().then(function (blogs) {
+        res.json(blogs);
+    }).catch(function (err) {
+        res.status(500);
+        console.error(err);
+    });
+});
+router.get('/', function (req, res) {
+    blog_1.default.findById(req.params['id']).then(function (blog) {
+        res.json(blog);
+    });
+});
 exports.default = router;

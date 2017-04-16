@@ -40,6 +40,16 @@ var blog;
         }());
         Controllers.RegisterController = RegisterController;
         ;
+        var BlogController = (function () {
+            function BlogController(blogService) {
+                this.blogService = blogService;
+                this.blogs = this.blogService.list();
+            }
+            ;
+            return BlogController;
+        }());
+        Controllers.BlogController = BlogController;
+        ;
         var AddBlogController = (function () {
             function AddBlogController(blogService, $state) {
                 this.blogService = blogService;
@@ -55,12 +65,6 @@ var blog;
         }());
         Controllers.AddBlogController = AddBlogController;
         ;
-        var BlogController = (function () {
-            function BlogController() {
-            }
-            return BlogController;
-        }());
-        Controllers.BlogController = BlogController;
     })(Controllers = blog.Controllers || (blog.Controllers = {}));
 })(blog || (blog = {}));
 ;

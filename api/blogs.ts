@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
     res.status(400).json(err);
   });
 });
-/*
+
 router.get('/', (req, res) => {
   Blog.find().then((blogs) => {
     res.json(blogs);
@@ -30,5 +30,5 @@ router.get('/', (req, res) => {
     res.json(blog);
   });
 });
-**/
+
 export default router;

@@ -26,6 +26,9 @@ namespace blog.Services {
     return this.BlogResource.save(blog);
   }
 
+  public list() {
+    return this.BlogResource.query();
+  }
 
   public constructor(
     public $resource
