@@ -27,13 +27,13 @@ var blog;
                 this.BlogResource = $resource('/api/blogs/:id');
             }
             BlogService.prototype.saveBlog = function (blog) {
-                return this.BlogResource.save(blog);
+                return this.BlogResource.save(blog).$promise;
             };
             BlogService.prototype.list = function () {
                 return this.BlogResource.query();
             };
             BlogService.prototype.removeBlog = function (id) {
-                return this.BlogResource.delete({ id: id });
+                return this.BlogResource.delete({ id: id }).$promise;
             };
             return BlogService;
         }());

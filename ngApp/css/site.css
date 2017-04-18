@@ -3,19 +3,18 @@ body{
     background-image: url(http://rcysl.com/wp-content/uploads/2016/11/Wallpapers-Hipster-Mobile-Compatible.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position:center;
+    background-position: center;
     background-size: fill;
-    color: white;
 }
 body:after{
-    position:fixed;
-    content:"";
-    top:0;
-    right:0;
-    bottom:0;
-    left:0;
-    background:rgba(0,0,0,0.9);
-    z-index:-1;
+    position: fixed;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: -1;
 }
 
 #loginform {

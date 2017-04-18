@@ -23,7 +23,7 @@ namespace blog.Services {
   private BlogResource;
 
   public saveBlog(blog) {
-    return this.BlogResource.save(blog);
+    return this.BlogResource.save(blog).$promise;
   }
 
   public list() {
@@ -31,7 +31,7 @@ namespace blog.Services {
   }
 
   public removeBlog(id){
-    return this.BlogResource.delete({id:id})
+    return this.BlogResource.delete({ id:id }).$promise;
   }
 
   public constructor(

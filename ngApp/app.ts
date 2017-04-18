@@ -32,7 +32,7 @@ namespace blog {
                 controllerAs: 'controller'
             })
             .state('edit', {
-                url: '/edit',
+                url: '/edit/:id',
                 templateUrl: '/ngApp/views/editBlog.html',
                 controller: blog.Controllers.EditBlogController,
                 controllerAs: 'controller'

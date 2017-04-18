@@ -5,6 +5,12 @@ let mongoose = require('mongoose');
 let router = express.Router();
 
 router.post('/', (req, res) => {
+  console.log(req.body);
+if(req.body.id) {
+  Blog.findByIdAndUpdate(req.body.id, { "$set": { "title": req.body.title, "content": req.body.content }}, { "new": true, "upsert": true }).then(() => {
+  res.end();
+});
+} else {
   let blog = new Blog();
   blog.title = req.body.title;
   blog.content = req.body.content;
@@ -14,6 +20,7 @@ router.post('/', (req, res) => {
   }).catch((err) => {
     res.status(400).json(err);
   });
+}
 });
 
 router.get('/', (req, res) => {
@@ -31,23 +38,6 @@ router.get('/', (req, res) => {
   });
 });
 
-router.post('/:id', (req, res) => {
-  let blogId = req.params.id;
-
-  Blog.findById(blogId).then((blog) => {
-    blog.title = req.body.title;
-    blog.content = req.body.content;
-
-    blog.save().then((updatedBlog) => {
-      res.json(updatedBlog);
-    }).catch((err) => {
-      res.status(400).json(err);
-    });
-  }).catch(() => {
-    res.sendStatus(404)
-  });
-
-});
 
 router.delete('/:id', (req, res) => {
   let blogId = req.params.id;
