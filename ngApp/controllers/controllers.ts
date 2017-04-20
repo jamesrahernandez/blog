@@ -1,5 +1,7 @@
-namespace blog.Controllers {
+let token = window.localStorage['token']
 
+namespace blog.Controllers {
+// NOTE: USER LOGIN
   export class LoginController {
     public userInfo;
 
@@ -21,6 +23,7 @@ namespace blog.Controllers {
 
   };
 
+// NOTE: REGISTER USER
   export class RegisterController {
     public user;
 
@@ -39,7 +42,7 @@ namespace blog.Controllers {
   };
 
 };
-
+// NOTE: READ/DELETE BLOG POSTS
   export class BlogController {
     public blogs;
 
@@ -54,11 +57,14 @@ namespace blog.Controllers {
     };
   };
 
+// NOTE: ADD/CREATE BLOG POSTS
   export class AddBlogController {
     public blogs;
     public blog;
 
     public addBlog() {
+      let payload = JSON.parse(window.atob(token.split('.')[1]));
+      this.blog.owner_id = payload.id;
       this.blogService.saveBlog(this.blog);
       this.$state.go('blog');
     };
@@ -70,7 +76,7 @@ namespace blog.Controllers {
 
     };
   };
-
+// NOTE: EDIT/UPDATE BLOG POSTS
   export class EditBlogController {
     public blog;
     public id;
@@ -78,11 +84,13 @@ namespace blog.Controllers {
     public editBlog() {
       this.blog.id = this.id;
       this.blogService.saveBlog(this.blog);
+      this.$state.go('blog')
     };
 
     public constructor(
       private blogService,
       public $stateParams,
+      public $state,
     ) {
       this.id = $stateParams['id'];
     };

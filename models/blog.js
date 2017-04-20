@@ -6,11 +6,12 @@ var blogSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        minlength: 3
+        minlength: 3,
+        owner_id: String,
     },
     content: {
         type: String,
-        required: true
+        required: true,
     },
 });
 exports.default = mongoose.model('Blog', blogSchema);

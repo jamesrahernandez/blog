@@ -1,3 +1,4 @@
+var token = window.localStorage['token'];
 var blog;
 (function (blog) {
     var Controllers;
@@ -60,6 +61,8 @@ var blog;
                 this.$state = $state;
             }
             AddBlogController.prototype.addBlog = function () {
+                var payload = JSON.parse(window.atob(token.split('.')[1]));
+                this.blog.owner_id = payload.id;
                 this.blogService.saveBlog(this.blog);
                 this.$state.go('blog');
             };
@@ -70,14 +73,16 @@ var blog;
         Controllers.AddBlogController = AddBlogController;
         ;
         var EditBlogController = (function () {
-            function EditBlogController(blogService, $stateParams) {
+            function EditBlogController(blogService, $stateParams, $state) {
                 this.blogService = blogService;
                 this.$stateParams = $stateParams;
+                this.$state = $state;
                 this.id = $stateParams['id'];
             }
             EditBlogController.prototype.editBlog = function () {
                 this.blog.id = this.id;
                 this.blogService.saveBlog(this.blog);
+                this.$state.go('blog');
             };
             ;
             ;

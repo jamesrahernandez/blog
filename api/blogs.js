@@ -7,7 +7,7 @@ var router = express.Router();
 router.post('/', function (req, res) {
     console.log(req.body);
     if (req.body.id) {
-        blog_1.default.findByIdAndUpdate(req.body.id, { "$set": { "title": req.body.title, "content": req.body.content } }, { "new": true, "upsert": true }).then(function () {
+        blog_1.default.findByIdAndUpdate(req.body.id, { "$set": { "title": req.body.title, "content": req.body.content, "owner_id": req.body.id } }, { "new": true, "upsert": true }).then(function () {
             res.end();
         });
     }

@@ -4,10 +4,11 @@ let mongoose = require('mongoose');
 
 let router = express.Router();
 
+// NOTE: ADD/CREATE BLOG POSTS
 router.post('/', (req, res) => {
   console.log(req.body);
-if(req.body.id) {
-  Blog.findByIdAndUpdate(req.body.id, { "$set": { "title": req.body.title, "content": req.body.content }}, { "new": true, "upsert": true }).then(() => {
+  if(req.body.id) {
+  Blog.findByIdAndUpdate(req.body.id, { "$set": { "title": req.body.title, "content": req.body.content, "owner_id": req.body.id }}, { "new": true, "upsert": true }).then(() => {
   res.end();
 });
 } else {
@@ -23,6 +24,7 @@ if(req.body.id) {
 }
 });
 
+// NOTE: GET/READ BLOG POSTS
 router.get('/', (req, res) => {
   Blog.find().then((blogs) => {
     res.json(blogs);
@@ -38,7 +40,7 @@ router.get('/', (req, res) => {
   });
 });
 
-
+// NOTE: REMOVE/DELETE BLOG POSTS
 router.delete('/:id', (req, res) => {
   let blogId = req.params.id;
   Blog.remove({_id:blogId}).then(() => {
@@ -48,6 +50,5 @@ router.delete('/:id', (req, res) => {
     console.log(err);
   });
 });
-
 
 export default router;
