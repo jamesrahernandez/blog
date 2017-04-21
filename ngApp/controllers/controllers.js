@@ -44,7 +44,8 @@ var blog;
         var BlogController = (function () {
             function BlogController(blogService) {
                 this.blogService = blogService;
-                this.blogs = this.blogService.list();
+                var payload = JSON.parse(window.atob(token.split('.')[1]));
+                this.blogs = this.blogService.list(payload.id);
             }
             BlogController.prototype.deleteBlog = function (id) {
                 this.blogService.removeBlog(id);

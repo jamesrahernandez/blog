@@ -26,8 +26,8 @@ namespace blog.Services {
     return this.BlogResource.save(blog).$promise;
   }
 
-  public list() {
-    return this.BlogResource.query();
+  public list(id) {
+    return this.BlogResource.query({ id: id });
   }
 
   public removeBlog(id){

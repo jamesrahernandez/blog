@@ -29,8 +29,8 @@ var blog;
             BlogService.prototype.saveBlog = function (blog) {
                 return this.BlogResource.save(blog).$promise;
             };
-            BlogService.prototype.list = function () {
-                return this.BlogResource.query();
+            BlogService.prototype.list = function (id) {
+                return this.BlogResource.query({ id: id });
             };
             BlogService.prototype.removeBlog = function (id) {
                 return this.BlogResource.delete({ id: id }).$promise;

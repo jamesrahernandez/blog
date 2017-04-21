@@ -1,9 +1,28 @@
 <h2>Uploaded Blog Posts</h2>
+<!-- NOTE: SIDEBLOG SECTION
+  <div class="container" id="maincontent">
 
-<a href="/add">Create a new post</a>
+  <div class="container" id="sideblog">
+    <h4>Recent Blog Posts</h4>
 
-<li ng-repeat="blog in controller.blogs">
-  {{blog.title}}, {{blog.content}}
-  <a href="/edit/{{blog._id}}">Edit Blog</a>
-  <a href="#" ng-click="controller.deleteBlog(blog._id)">Delete Blog</a>
-</li>
+  </div>
+-->
+<!-- NOTE: MAIN BLOG SECTION -->
+  <div class="container" id="mainblog">
+    <li ng-repeat="blog in controller.blogs" id="bloglist">
+      {{blog.title}}, {{blog.content}}
+      <a href="/edit/{{blog._id}}">Edit Blog</a>
+      <a href="#" ng-click="controller.deleteBlog(blog._id)">Delete Blog</a>
+    </li>
+  <!-- NOTE: CREATE BLOG BUTTON -->
+    <button type="button" name="button">
+      <a href="/add">Create Post</a>
+    </button>
+  </div>
+
+<!-- NOTE: SIDEBAR SECTION
+  <div class="container" id="sidebar">
+    <h3>About The Author</h3>
+  </div>
+-->
+</div>

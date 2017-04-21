@@ -10,12 +10,14 @@ let blogSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 3,
-    owner_id: String,
   },
   content: {
     type: String,
     required: true,
   },
+  owner_id: {
+    type: String,
+  }
 });
 
 export default mongoose.model<IBlog>('Blog', blogSchema);

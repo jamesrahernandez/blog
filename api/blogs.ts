@@ -8,13 +8,14 @@ let router = express.Router();
 router.post('/', (req, res) => {
   console.log(req.body);
   if(req.body.id) {
-  Blog.findByIdAndUpdate(req.body.id, { "$set": { "title": req.body.title, "content": req.body.content, "owner_id": req.body.id }}, { "new": true, "upsert": true }).then(() => {
+  Blog.findByIdAndUpdate(req.body.id, { "$set": { "title": req.body.title, "content": req.body.content, }}, { "new": true, "upsert": true }).then(() => {
   res.end();
 });
 } else {
-  let blog = new Blog();
+  let blog:any = new Blog();
   blog.title = req.body.title;
   blog.content = req.body.content;
+  blog.owner_id = req.body.owner_id;
 
   blog.save().then((newBlog) => {
     res.json(newBlog);
@@ -25,8 +26,8 @@ router.post('/', (req, res) => {
 });
 
 // NOTE: GET/READ BLOG POSTS
-router.get('/', (req, res) => {
-  Blog.find().then((blogs) => {
+router.get('/:id', (req, res) => {
+  Blog.find({ owner_id: req.params['id'] }).then((blogs) => {
     res.json(blogs);
   }).catch((err) => {
     res.status(500);
@@ -34,7 +35,7 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/', (req, res) => {
+router.get('/:id', (req, res) => {
   Blog.findById(req.params['id']).then((blog) => {
     res.json(blog);
   });

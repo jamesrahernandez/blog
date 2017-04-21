@@ -53,7 +53,8 @@ namespace blog.Controllers {
     public constructor(
       private blogService,
     ) {
-      this.blogs = this.blogService.list();
+      let payload = JSON.parse(window.atob(token.split('.')[1]));
+      this.blogs = this.blogService.list(payload.id);
     };
   };
 

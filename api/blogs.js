@@ -7,7 +7,7 @@ var router = express.Router();
 router.post('/', function (req, res) {
     console.log(req.body);
     if (req.body.id) {
-        blog_1.default.findByIdAndUpdate(req.body.id, { "$set": { "title": req.body.title, "content": req.body.content, "owner_id": req.body.id } }, { "new": true, "upsert": true }).then(function () {
+        blog_1.default.findByIdAndUpdate(req.body.id, { "$set": { "title": req.body.title, "content": req.body.content, } }, { "new": true, "upsert": true }).then(function () {
             res.end();
         });
     }
@@ -15,6 +15,7 @@ router.post('/', function (req, res) {
         var blog_2 = new blog_1.default();
         blog_2.title = req.body.title;
         blog_2.content = req.body.content;
+        blog_2.owner_id = req.body.owner_id;
         blog_2.save().then(function (newBlog) {
             res.json(newBlog);
         }).catch(function (err) {
@@ -22,15 +23,15 @@ router.post('/', function (req, res) {
         });
     }
 });
-router.get('/', function (req, res) {
-    blog_1.default.find().then(function (blogs) {
+router.get('/:id', function (req, res) {
+    blog_1.default.find({ owner_id: req.params['id'] }).then(function (blogs) {
         res.json(blogs);
     }).catch(function (err) {
         res.status(500);
         console.error(err);
     });
 });
-router.get('/', function (req, res) {
+router.get('/:id', function (req, res) {
     blog_1.default.findById(req.params['id']).then(function (blog) {
         res.json(blog);
     });
