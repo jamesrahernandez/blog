@@ -9,7 +9,7 @@
 -->
 <!-- NOTE: MAIN BLOG SECTION -->
   <div class="container" id="mainblog">
-    <li ng-repeat="blog in controller.blogs" id="bloglist">
+    <li ng-repeat="blog in controller.blogs">
       {{blog.title}}, {{blog.content}}
       <a href="/edit/{{blog._id}}">Edit Blog</a>
       <a href="#" ng-click="controller.deleteBlog(blog._id)">Delete Blog</a>

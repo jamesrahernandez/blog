@@ -10,6 +10,7 @@ namespace blog.Controllers {
         this.$window.localStorage.setItem("token", JSON.stringify(data.token));
         this.$state.go('blog');
           alert('Login Successful!');
+          console.log("You Have Logged Into Your Account");
       });
     };
 
@@ -31,6 +32,8 @@ namespace blog.Controllers {
       this.userService.registerUser(this.user).then(() => {
         this.$state.go('login');
         alert('Signup Successful, Please Login!');
+        console.log("You Have Created An Account");
+
       });
     };
 
@@ -48,6 +51,7 @@ namespace blog.Controllers {
 
     public deleteBlog(id) {
       this.blogService.removeBlog(id);
+      console.log("You Have Deleted A Blog Post");
     };
 
     public constructor(
@@ -68,6 +72,7 @@ namespace blog.Controllers {
       this.blog.owner_id = payload.id;
       this.blogService.saveBlog(this.blog);
       this.$state.go('blog');
+      console.log("You Have Created A Blog Post")
     };
 
     public constructor(
@@ -85,7 +90,8 @@ namespace blog.Controllers {
     public editBlog() {
       this.blog.id = this.id;
       this.blogService.saveBlog(this.blog);
-      this.$state.go('blog')
+      this.$state.go('blog');
+      console.log("You Have Updated A Blog Post")
     };
 
     public constructor(

@@ -22,17 +22,18 @@ router.post('/Register', (req, res) => {
 });
 
 router.post('/Login/Local', (req, res, next) => {
-  if(!req.body.username || !req.body.password) {
-    res.status(400);
+  if (!req.body.username || !req.body.password) {
+    res.status(400).send("Please fill outevery field");
   };
   passport.authenticate('local', function(err, user, info) {
+    console.log(user);
     if(err) {
-      res.status(400);
+      return next(err);
     };
     if(user) {
       return res.json({ token: user.generateJWT() });
     };
-    return res.status(400);
+    return res.status(400).send(info);
   }) (req, res, next);
 });
 
