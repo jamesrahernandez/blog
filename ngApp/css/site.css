@@ -5,6 +5,7 @@ body{
     background-attachment: fixed;
     background-position: center;
     background-size: fill;
+    font-family: tahoma;
 }
 body:after{
     position: fixed;
@@ -15,6 +16,32 @@ body:after{
     left: 0;
     background: rgba(0,0,0,0.9);
     z-index: -1;
+}
+
+h1 {
+color: white;
+}
+
+h2 {
+  text-align: center;
+  color: grey;
+}
+h3, h4 {
+  text-align: center;
+  color: darkgrey;
+}
+h5 {
+  color: grey;
+}
+
+p {
+  text-align: center;
+  color: white;
+  font-size:  18px;
+}
+
+#blogbox {
+  border: 1px solid white;
 }
 
 #loginform {
@@ -30,4 +57,23 @@ body:after{
 #registerform {
   text-align: center;
   font-size: 24px;
+}
+
+#sideblog {
+  width: 20%;
+  height: 100%;
+  float: left;
+  overflow: scroll;
+}
+#mainblog {
+  width:  60%;
+  height: 100%;
+  float: left;
+  color: white;
+  overflow: scroll;;
+}
+
+#sidebar {
+  width: 20%;
+  float: left;
 }

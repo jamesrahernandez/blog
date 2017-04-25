@@ -1,28 +1,43 @@
 <h2>Uploaded Blog Posts</h2>
-<!-- NOTE: SIDEBLOG SECTION
-  <div class="container" id="maincontent">
-
+<!-- NOTE: SIDEBLOG SECTION -->
   <div class="container" id="sideblog">
     <h4>Recent Blog Posts</h4>
-
+    <h5 ng-repeat="blog in controller.blogs">
+      {{blog.title}} <a href="#">View</a>
+    </h5>
   </div>
--->
+
 <!-- NOTE: MAIN BLOG SECTION -->
   <div class="container" id="mainblog">
-    <li ng-repeat="blog in controller.blogs">
-      {{blog.title}}, {{blog.content}}
-      <a href="/edit/{{blog._id}}">Edit Blog</a>
-      <a href="#" ng-click="controller.deleteBlog(blog._id)">Delete Blog</a>
-    </li>
-  <!-- NOTE: CREATE BLOG BUTTON -->
-    <button type="button" name="button">
-      <a href="/add">Create Post</a>
-    </button>
-  </div>
+    <!-- NOTE: CREATE BLOG BUTTON -->
+      <button type="button" name="createbutton">
+        <a href="/add">Create Post</a>
+      </button>
 
-<!-- NOTE: SIDEBAR SECTION
+    <!-- NOTE: SECTION FOR SINGLE BLOG POST -->
+  <div class="container" id="blogbox">
+    <ul>
+      <li ng-repeat="blog in controller.blogs">
+        {{blog.title}}: {{blog.content}}
+        <!-- NOTE: EDIT BLOG BUTTON -->
+        <button type="button" name="editbutton">
+          <a href="/edit/{{blog._id}}">Edit Blog</a>
+        </button>
+        <!-- NOTE: DELETE BLOG BUTTON -->
+        <button type="button" name="deletebutton">
+          <a href="#" ng-click="controller.deleteBlog(blog._id)">Delete Blog</a>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- NOTE: SIDEBAR SECTION -->
   <div class="container" id="sidebar">
     <h3>About The Author</h3>
+    <h4>James Robert</h4>
+    <p>This is a website created by James Robert,
+            the main purpose of this site is to showcase
+            my blog app I created for codercamps.
+    </p>
   </div>
--->
-</div>
