@@ -10,15 +10,22 @@ var blog;
                 this.$state = $state;
             }
             LoginController.prototype.login = function () {
+                if (this.isAdmin === true) {
+                    this.userInfo.role = 'admin';
+                    this.createSession();
+                }
+                else {
+                    this.userInfo.role = 'guest';
+                    this.createSession();
+                }
+            };
+            LoginController.prototype.createSession = function () {
                 var _this = this;
                 this.userService.loginUser(this.userInfo).then(function (data) {
                     _this.$window.localStorage.setItem("token", JSON.stringify(data.token));
                     _this.$state.go('blog');
-                    alert('Login Successful!');
-                    console.log("You Have Logged Into Your Account");
                 });
             };
-            ;
             ;
             return LoginController;
         }());
@@ -46,12 +53,22 @@ var blog;
         var BlogController = (function () {
             function BlogController(blogService) {
                 this.blogService = blogService;
-                var payload = JSON.parse(window.atob(token.split('.')[1]));
-                this.blogs = this.blogService.list(payload.id);
+                var token = window.localStorage['token'];
+                if (token) {
+                    this.payload = JSON.parse(window.atob(token.split('.')[1]));
+                    console.log(this.payload);
+                    this.blogs = this.blogService.list(this.payload.id);
+                }
             }
             BlogController.prototype.deleteBlog = function (id) {
-                this.blogService.removeBlog(id);
-                console.log("You Have Deleted A Blog Post");
+                if (this.payload.role === 'admin') {
+                    alert('Success!');
+                    this.blogService.removeBlog(id);
+                    console.log("You Have Deleted A Blog Post");
+                }
+                else {
+                    alert('Denied. admins only.');
+                }
             };
             ;
             ;
@@ -63,13 +80,24 @@ var blog;
             function AddBlogController(blogService, $state) {
                 this.blogService = blogService;
                 this.$state = $state;
+                var token = window.localStorage['token'];
+                if (token) {
+                    this.payload = JSON.parse(window.atob(token.split('.')[1]));
+                    console.log(this.payload);
+                    this.blogs = this.blogService.list(this.payload.id);
+                }
             }
             AddBlogController.prototype.addBlog = function () {
-                var payload = JSON.parse(window.atob(token.split('.')[1]));
-                this.blog.owner_id = payload.id;
-                this.blogService.saveBlog(this.blog);
-                this.$state.go('blog');
-                console.log("You Have Created A Blog Post");
+                if (this.payload.role === 'admin') {
+                    alert('Success!');
+                    this.blog.owner_id = this.payload.id;
+                    this.blogService.saveBlog(this.blog);
+                    this.$state.go('blog');
+                    console.log("You Have Created A Blog Post");
+                }
+                else {
+                    alert('Denied! Admins onl.');
+                }
             };
             ;
             ;
@@ -83,12 +111,23 @@ var blog;
                 this.$stateParams = $stateParams;
                 this.$state = $state;
                 this.id = $stateParams['id'];
+                var token = window.localStorage['token'];
+                if (token) {
+                    this.payload = JSON.parse(window.atob(token.split('.')[1]));
+                    console.log(this.payload);
+                }
             }
             EditBlogController.prototype.editBlog = function () {
-                this.blog.id = this.id;
-                this.blogService.saveBlog(this.blog);
-                this.$state.go('blog');
-                console.log("You Have Updated A Blog Post");
+                if (this.payload.role === 'admin') {
+                    alert('Success!');
+                    this.blog.id = this.id;
+                    this.blogService.saveBlog(this.blog);
+                    this.$state.go('blog');
+                    console.log("You Have Updated A Blog Post");
+                }
+                else {
+                    alert('Denied. admins only.');
+                }
             };
             ;
             ;

@@ -29,11 +29,12 @@ UserSchema.method('validatePassword', function(password) {
   return (hash === this.passwordHash);
 });
 
-UserSchema.method('generateJWT', function() {
+UserSchema.method('generateJWT', function(role) {
   return jwt.sign({
     id: this._id,
     username: this.username,
-    email: this.email
+    email: this.email,
+    role: role,
   }, 'SecretKey')
 });
 

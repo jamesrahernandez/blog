@@ -4,15 +4,23 @@ namespace blog.Controllers {
 // NOTE: USER LOGIN
   export class LoginController {
     public userInfo;
+    public isAdmin;
 
     public login() {
-      this.userService.loginUser(this.userInfo).then((data) => {
-        this.$window.localStorage.setItem("token", JSON.stringify(data.token));
-        this.$state.go('blog');
-          alert('Login Successful!');
-          console.log("You Have Logged Into Your Account");
-      });
-    };
+            if(this.isAdmin === true) {
+              this.userInfo.role = 'admin';
+              this.createSession();
+            } else {
+              this.userInfo.role = 'guest';
+              this.createSession();
+            }
+          }
+          public createSession() {
+            this.userService.loginUser(this.userInfo).then((data) => {
+              this.$window.localStorage.setItem("token", JSON.stringify(data.token));
+              this.$state.go('blog');
+            })
+          }
 
     public constructor(
       private userService,
@@ -48,17 +56,27 @@ namespace blog.Controllers {
 // NOTE: READ/DELETE BLOG POSTS
   export class BlogController {
     public blogs;
-
+    public payload
     public deleteBlog(id) {
-      this.blogService.removeBlog(id);
-      console.log("You Have Deleted A Blog Post");
+      if(this.payload.role === 'admin') {
+          alert('Success!');
+          this.blogService.removeBlog(id);
+          console.log("You Have Deleted A Blog Post");
+        } else {
+          alert('Denied. admins only.')
+        }
     };
 
     public constructor(
       private blogService,
     ) {
-      let payload = JSON.parse(window.atob(token.split('.')[1]));
-      this.blogs = this.blogService.list(payload.id);
+  //    let payload = JSON.parse(window.atob(token.split('.')[1]));
+  let token = window.localStorage['token'];
+    if(token) {
+      this.payload = JSON.parse(window.atob(token.split('.')[1]));
+      console.log(this.payload);
+       this.blogs = this.blogService.list(this.payload.id);
+    }
     };
   };
 
@@ -66,32 +84,50 @@ namespace blog.Controllers {
   export class AddBlogController {
     public blogs;
     public blog;
+    public payload;
 
     public addBlog() {
-      let payload = JSON.parse(window.atob(token.split('.')[1]));
-      this.blog.owner_id = payload.id;
-      this.blogService.saveBlog(this.blog);
-      this.$state.go('blog');
-      console.log("You Have Created A Blog Post")
+      if(this.payload.role === 'admin') {
+          alert('Success!');
+          this.blog.owner_id = this.payload.id;
+          this.blogService.saveBlog(this.blog);
+          this.$state.go('blog');
+          console.log("You Have Created A Blog Post")
+        } else {
+          alert('Denied! Admins onl.')
+        }
+
     };
 
     public constructor(
       private blogService,
       public $state,
     ) {
-
+      let token = window.localStorage['token'];
+        if(token) {
+          this.payload = JSON.parse(window.atob(token.split('.')[1]));
+          console.log(this.payload);
+           this.blogs = this.blogService.list(this.payload.id);
+        }
+        };
     };
-  };
+
 // NOTE: EDIT/UPDATE BLOG POSTS
   export class EditBlogController {
     public blog;
     public id;
+    public payload;
 
     public editBlog() {
-      this.blog.id = this.id;
-      this.blogService.saveBlog(this.blog);
-      this.$state.go('blog');
-      console.log("You Have Updated A Blog Post")
+      if(this.payload.role === 'admin') {
+          alert('Success!');
+          this.blog.id = this.id;
+          this.blogService.saveBlog(this.blog);
+          this.$state.go('blog');
+          console.log("You Have Updated A Blog Post");
+        } else {
+          alert('Denied. admins only.')
+        }
     };
 
     public constructor(
@@ -100,6 +136,11 @@ namespace blog.Controllers {
       public $state,
     ) {
       this.id = $stateParams['id'];
+      let token = window.localStorage['token'];
+        if(token) {
+          this.payload = JSON.parse(window.atob(token.split('.')[1]));
+          console.log(this.payload);
+        }
     };
   };
 
