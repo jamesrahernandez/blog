@@ -7,21 +7,21 @@ let UserSchema = new mongoose.Schema({
     type: String,
     lowercase: true,
     unique: true,
-    required: true
+    required: true,
   },
   email: {
     type: String,
     lowercase: true,
     unique: true,
-    required: true
+    required: true,
   },
   passwordHash: String,
-  salt: String
+  salt: String,
 });
 
 UserSchema.method('setPassword', function(password) {
   this.salt = crypto.randomBytes(16).toString('hex');
-  this.passwordHash = crypto.pbkdf2Sync(password, this.salt, 1000, 64,'sha1').toString('hex');
+  this.passwordHash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha1').toString('hex');
 });
 
 UserSchema.method('validatePassword', function(password) {
@@ -35,7 +35,7 @@ UserSchema.method('generateJWT', function(role) {
     username: this.username,
     email: this.email,
     role: role,
-  }, 'SecretKey')
+  }, 'SecretKey');
 });
 
 export default mongoose.model('User', UserSchema);

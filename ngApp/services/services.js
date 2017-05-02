@@ -29,16 +29,22 @@ var blog;
             BlogService.prototype.saveBlog = function (blog) {
                 return this.BlogResource.save(blog).$promise;
             };
+            ;
             BlogService.prototype.list = function (id) {
                 return this.BlogResource.query({ id: id });
             };
+            ;
             BlogService.prototype.removeBlog = function (id) {
                 return this.BlogResource.delete({ id: id }).$promise;
             };
+            ;
+            ;
             return BlogService;
         }());
         Services.BlogService = BlogService;
+        ;
         angular.module('blog').service('userService', UserService);
         angular.module('blog').service('blogService', BlogService);
     })(Services = blog_1.Services || (blog_1.Services = {}));
 })(blog || (blog = {}));
+;

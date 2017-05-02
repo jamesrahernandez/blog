@@ -13,14 +13,14 @@ namespace blog.Controllers {
             } else {
               this.userInfo.role = 'guest';
               this.createSession();
-            }
-          }
+            };
+          };
           public createSession() {
             this.userService.loginUser(this.userInfo).then((data) => {
               this.$window.localStorage.setItem("token", JSON.stringify(data.token));
               this.$state.go('blog');
-            })
-          }
+            });
+          };
 
     public constructor(
       private userService,
@@ -56,15 +56,15 @@ namespace blog.Controllers {
 // NOTE: READ/DELETE BLOG POSTS
   export class BlogController {
     public blogs;
-    public payload
+    public payload;
     public deleteBlog(id) {
       if(this.payload.role === 'admin') {
           alert('Success!');
           this.blogService.removeBlog(id);
           console.log("You Have Deleted A Blog Post");
         } else {
-          alert('Denied. admins only.')
-        }
+          alert('Denied! Admins Only.');
+        };
     };
 
     public constructor(
@@ -76,7 +76,7 @@ namespace blog.Controllers {
       this.payload = JSON.parse(window.atob(token.split('.')[1]));
       console.log(this.payload);
        this.blogs = this.blogService.list(this.payload.id);
-    }
+    };
     };
   };
 
@@ -92,10 +92,10 @@ namespace blog.Controllers {
           this.blog.owner_id = this.payload.id;
           this.blogService.saveBlog(this.blog);
           this.$state.go('blog');
-          console.log("You Have Created A Blog Post")
+          console.log("You Have Created A Blog Post");
         } else {
-          alert('Denied! Admins onl.')
-        }
+          alert('Denied! Admins Only.');
+        };
 
     };
 
@@ -108,7 +108,7 @@ namespace blog.Controllers {
           this.payload = JSON.parse(window.atob(token.split('.')[1]));
           console.log(this.payload);
            this.blogs = this.blogService.list(this.payload.id);
-        }
+        };
         };
     };
 
@@ -126,8 +126,8 @@ namespace blog.Controllers {
           this.$state.go('blog');
           console.log("You Have Updated A Blog Post");
         } else {
-          alert('Denied. admins only.')
-        }
+          alert('Denied! Admins Only.');
+        };
     };
 
     public constructor(
@@ -140,7 +140,7 @@ namespace blog.Controllers {
         if(token) {
           this.payload = JSON.parse(window.atob(token.split('.')[1]));
           console.log(this.payload);
-        }
+        };
     };
   };
 

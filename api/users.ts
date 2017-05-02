@@ -8,8 +8,8 @@ let User = mongoose.model('User', {
   date_created: Date,
   date_deleted: {
     type: Date,
-    default: null
-  }
+    default: null,
+  },
 });
 
 router.post('/users', function(req, res, next) {
@@ -23,9 +23,9 @@ router.post('/users', function(req, res, next) {
       console.log(err);
     } else {
       console.log(user);
-    }
+    };
     res.send(user);
-  })
+  });
 });
 
 export = router;

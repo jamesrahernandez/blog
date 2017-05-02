@@ -14,6 +14,6 @@ var blogSchema = new mongoose.Schema({
     },
     owner_id: {
         type: String,
-    }
+    },
 });
 exports.default = mongoose.model('Blog', blogSchema);

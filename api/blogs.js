@@ -22,6 +22,7 @@ router.post('/', function (req, res) {
             res.status(400).json(err);
         });
     }
+    ;
 });
 router.get('/:id', function (req, res) {
     blog_1.default.find({ owner_id: req.params['id'] }).then(function (blogs) {

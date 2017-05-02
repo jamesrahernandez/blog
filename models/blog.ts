@@ -17,7 +17,7 @@ let blogSchema = new mongoose.Schema({
   },
   owner_id: {
     type: String,
-  }
+  },
 });
 
 export default mongoose.model<IBlog>('Blog', blogSchema);

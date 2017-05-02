@@ -18,7 +18,9 @@ var blog;
                     this.userInfo.role = 'guest';
                     this.createSession();
                 }
+                ;
             };
+            ;
             LoginController.prototype.createSession = function () {
                 var _this = this;
                 this.userService.loginUser(this.userInfo).then(function (data) {
@@ -26,6 +28,7 @@ var blog;
                     _this.$state.go('blog');
                 });
             };
+            ;
             ;
             return LoginController;
         }());
@@ -59,6 +62,7 @@ var blog;
                     console.log(this.payload);
                     this.blogs = this.blogService.list(this.payload.id);
                 }
+                ;
             }
             BlogController.prototype.deleteBlog = function (id) {
                 if (this.payload.role === 'admin') {
@@ -67,8 +71,9 @@ var blog;
                     console.log("You Have Deleted A Blog Post");
                 }
                 else {
-                    alert('Denied. admins only.');
+                    alert('Denied! Admins Only.');
                 }
+                ;
             };
             ;
             ;
@@ -86,6 +91,7 @@ var blog;
                     console.log(this.payload);
                     this.blogs = this.blogService.list(this.payload.id);
                 }
+                ;
             }
             AddBlogController.prototype.addBlog = function () {
                 if (this.payload.role === 'admin') {
@@ -96,8 +102,9 @@ var blog;
                     console.log("You Have Created A Blog Post");
                 }
                 else {
-                    alert('Denied! Admins onl.');
+                    alert('Denied! Admins Only.');
                 }
+                ;
             };
             ;
             ;
@@ -116,6 +123,7 @@ var blog;
                     this.payload = JSON.parse(window.atob(token.split('.')[1]));
                     console.log(this.payload);
                 }
+                ;
             }
             EditBlogController.prototype.editBlog = function () {
                 if (this.payload.role === 'admin') {
@@ -126,8 +134,9 @@ var blog;
                     console.log("You Have Updated A Blog Post");
                 }
                 else {
-                    alert('Denied. admins only.');
+                    alert('Denied! Admins Only.');
                 }
+                ;
             };
             ;
             ;

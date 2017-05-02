@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
   }).catch((err) => {
     res.status(400).json(err);
   });
-}
+};
 });
 
 // NOTE: GET/READ BLOG POSTS
@@ -44,7 +44,7 @@ router.get('/:id', (req, res) => {
 // NOTE: REMOVE/DELETE BLOG POSTS
 router.delete('/:id', (req, res) => {
   let blogId = req.params.id;
-  Blog.remove({_id:blogId}).then(() => {
+  Blog.remove({ _id:blogId }).then(() => {
     res.sendStatus(200);
   }).catch((err) => {
     res.status(500);
